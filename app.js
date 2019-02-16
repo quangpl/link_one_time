@@ -6,12 +6,16 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/link_one_time');
 var app = express();
-
+var db = mongoose.connection;
+db.once('open',()=>{
+  console.log('Connect MongoDB Success !');
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
