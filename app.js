@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/link_one_time');
+mongoose.connect('mongodb://localhost:27017/link_one_time',{ useNewUrlParser: true } );
 var app = express();
 var db = mongoose.connection;
 db.once('open',()=>{
@@ -39,7 +39,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.end('error');
 });
 
 module.exports = app;
